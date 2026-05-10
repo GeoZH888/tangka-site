@@ -1,0 +1,112 @@
+.kpage-poster {
+  padding-top: calc(var(--nav-height) + var(--sp-12));
+  padding-bottom: var(--sp-20);
+}
+
+.kpage-poster__head {
+  text-align: center;
+  margin-bottom: var(--sp-16);
+}
+.kpage-poster__head h1 {
+  font-size: clamp(2.5rem, 6.5vw, 5rem);
+  margin-top: var(--sp-3);
+  color: var(--white-pure);
+  text-transform: none;       /* Override poster-cap for the longer text */
+}
+.kpage-poster__rule {
+  width: 60px;
+  height: 1px;
+  background: var(--cream);
+  margin: var(--sp-6) auto var(--sp-8);
+}
+.kpage-poster__intro {
+  max-width: 640px;
+  margin: 0 auto;
+  font-family: var(--sans-display);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--cream-dim);
+  font-style: italic;
+}
+
+.kpage-poster__section {
+  margin-bottom: var(--sp-16);
+}
+.kpage-poster__cat {
+  font-family: var(--sans-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid rgba(212, 168, 74, 0.4);
+  margin-bottom: var(--sp-8);
+}
+
+.kpage-poster__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--sp-6);
+}
+
+.karticle {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: var(--sp-6);
+  background: var(--poster-blue-light);
+  border: 1px solid rgba(240, 230, 210, 0.15);
+  transition: all 0.4s var(--ease-luxury);
+  position: relative;
+}
+.karticle:hover {
+  background: var(--poster-blue-lighter);
+  border-color: var(--cream);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+.karticle__num {
+  font-family: var(--sans-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  margin-bottom: var(--sp-3);
+}
+.karticle__title {
+  font-family: var(--sans-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: 0;
+  color: var(--white-pure);
+  margin-bottom: var(--sp-3);
+  line-height: 1.25;
+}
+.karticle__title.cn-title {
+  font-family: var(--serif-cn);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+}
+.karticle__excerpt {
+  font-family: var(--sans-display);
+  color: var(--cream);
+  opacity: 0.85;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: var(--sp-4);
+}
+.karticle__more {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--sans-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  padding-top: var(--sp-3);
+  border-top: 1px solid rgba(240, 230, 210, 0.12);
+}
+.karticle:hover .karticle__more {
+  color: var(--cream);
+}

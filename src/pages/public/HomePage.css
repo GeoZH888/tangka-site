@@ -1,0 +1,561 @@
+/* =============================================================================
+   HomePage — Poster-style hero (Accademia delle Arti del Disegno reference)
+   ============================================================================= */
+
+/* Poster blue — slightly more saturated, slightly more violet than --lapis.
+   Calibrated against the Accademia poster reference image. */
+:root {
+  --poster-blue:        #1e3a6b;
+  --poster-blue-dark:   #142850;
+  --poster-blue-light:  #2e4f87;
+  --poster-text:        #f0e6d2;     /* soft cream — matches the linen tone */
+  --poster-text-muted:  #c8b896;
+}
+
+.home-poster {
+  min-height: 100vh;
+}
+
+/* =============================================================================
+   POSTER HERO
+   ============================================================================= */
+
+.poster {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--poster-blue);
+  color: var(--poster-text);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Vertical hairline between left and right panels */
+.poster::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 38%;
+  width: 1px;
+  background: rgba(240, 230, 210, 0.18);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* === LEFT PANEL === */
+.poster__left {
+  padding: clamp(2rem, 5vw, 4.5rem) clamp(2rem, 4vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 2rem);
+  position: relative;
+  z-index: 1;
+}
+
+/* Logo block — emblem + institute name */
+.poster__logo-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+.poster__logo-mark {
+  /* Make the emblem white-ish for contrast on blue */
+  filter: brightness(0) invert(1) opacity(0.95);
+}
+.poster__institute {
+  font-family: var(--serif-display);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--poster-text);
+  border-top: 1px solid rgba(240, 230, 210, 0.4);
+  padding-top: 0.5rem;
+  margin-top: 0.25rem;
+  line-height: 1.4;
+}
+
+/* Title block — artist name + kicker */
+.poster__title-block {
+  margin-top: clamp(1rem, 4vw, 2.5rem);
+}
+.poster__artist {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--poster-text);
+  margin: 0;
+}
+.poster__kicker {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 500;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--poster-text);
+  margin-top: 0.6rem;
+  line-height: 1.3;
+}
+
+/* Tagline — two lines */
+.poster__tagline {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: clamp(0.92rem, 1.3vw, 1.1rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--poster-text);
+  line-height: 1.65;
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+/* Dates */
+.poster__dates {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--poster-text);
+  margin-top: clamp(1rem, 3vw, 2rem);
+}
+
+/* Hours block */
+.poster__hours {
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+}
+.poster__hours-title {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--poster-text);
+  margin-bottom: 0.7rem;
+}
+.poster__hours-line {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  color: var(--poster-text-muted);
+  line-height: 1.85;
+}
+
+/* Free entrance */
+.poster__free {
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--poster-text);
+  margin-top: clamp(1rem, 3vw, 2rem);
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(240, 230, 210, 0.3);
+  border-bottom: 1px solid rgba(240, 230, 210, 0.3);
+}
+
+/* CTAs */
+.poster__cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+.poster__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--poster-text);
+  transition: all 0.3s var(--ease);
+}
+.poster__btn--primary {
+  background: var(--poster-text);
+  color: var(--poster-blue);
+}
+.poster__btn--primary:hover {
+  background: transparent;
+  color: var(--poster-text);
+}
+.poster__btn--ghost {
+  background: transparent;
+  color: var(--poster-text);
+}
+.poster__btn--ghost:hover {
+  background: var(--poster-text);
+  color: var(--poster-blue);
+}
+
+/* === RIGHT PANEL — image === */
+.poster__right {
+  position: relative;
+  overflow: hidden;
+  background: var(--poster-blue-dark);
+}
+
+.poster__image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+.poster__image--fallback {
+  display: grid;
+  place-items: center;
+  filter: brightness(0.85);
+}
+
+/* Subtle vignette so vertical text reads */
+.poster__right::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    rgba(20, 40, 80, 0.45) 0%,
+    rgba(20, 40, 80, 0.0) 22%,
+    rgba(20, 40, 80, 0.0) 78%,
+    rgba(20, 40, 80, 0.35) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Vertical Chinese name 桑吉才让 */
+.poster__chinese-name {
+  position: absolute;
+  left: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  z-index: 2;
+  font-family: var(--serif-cn);
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  font-weight: 400;
+  color: var(--poster-text);
+  line-height: 1;
+  text-shadow: 0 2px 12px rgba(20, 40, 80, 0.6);
+  letter-spacing: 0;
+  user-select: none;
+}
+
+/* Tibetan calligraphy column on the right edge */
+.poster__tibetan-column {
+  position: absolute;
+  right: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2rem);
+  z-index: 2;
+  text-shadow: 0 2px 12px rgba(20, 40, 80, 0.6);
+}
+
+/* === Mobile / narrow screens — stack vertically === */
+@media (max-width: 880px) {
+  .poster {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 60vh;
+    min-height: auto;
+  }
+  .poster::after { display: none; }
+  .poster__left {
+    padding: 2rem 1.5rem;
+    gap: 1.25rem;
+  }
+  .poster__right {
+    min-height: 60vh;
+  }
+  .poster__chinese-name {
+    font-size: 2.2rem;
+    gap: 0.7rem;
+    left: 5%;
+  }
+  .poster__tibetan-column {
+    right: 5%;
+    gap: 1rem;
+  }
+  .poster__cta {
+    margin-top: 1.5rem;
+  }
+}
+
+/* =============================================================================
+   SCROLL CONTENT — back on warm linen ground
+   (re-uses ornaments and rhythm from the previous design,
+    but the page now starts blue and transitions into linen)
+   ============================================================================= */
+
+/* === Centerpiece pair === */
+.centerpiece {
+  padding: clamp(4rem, 10vw, 8rem) var(--sp-8);
+  background: var(--linen);
+  position: relative;
+}
+.centerpiece__head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto var(--sp-12);
+}
+.centerpiece__head h2 { margin: var(--sp-4) 0 var(--sp-3); }
+.centerpiece__rule {
+  display: flex;
+  justify-content: center;
+  margin: var(--sp-4) 0 var(--sp-6);
+}
+.centerpiece__intro {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  line-height: 1.85;
+  font-style: italic;
+}
+.centerpiece__pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: var(--sp-8);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+@media (max-width: 880px) {
+  .centerpiece__pair { grid-template-columns: 1fr; }
+}
+
+.thangka-panel {
+  position: relative;
+  display: block;
+  padding: 30px;
+  isolation: isolate;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.5s var(--ease-luxury);
+}
+.thangka-panel:hover { transform: translateY(-4px); }
+.thangka-panel__brocade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+.thangka-panel__inner {
+  position: relative;
+  background: var(--linen);
+  padding: 0;
+}
+.thangka-panel__image {
+  aspect-ratio: 3/4;
+  background-size: cover;
+  background-position: center;
+  display: grid;
+  place-items: center;
+}
+.thangka-panel__placeholder {
+  opacity: 0.4;
+  filter: brightness(0) invert(1) opacity(0.5);
+}
+.thangka-panel__caption {
+  text-align: center;
+  margin-top: var(--sp-5);
+  padding: 0 var(--sp-3);
+}
+.thangka-panel__caption h3 { margin: var(--sp-2) 0; }
+.thangka-panel__meta {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  margin-bottom: var(--sp-3);
+}
+.thangka-panel__more {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--cinnabar);
+  letter-spacing: 0.04em;
+}
+
+/* === Highlights grid === */
+.highlights {
+  padding: clamp(4rem, 10vw, 8rem) 0;
+  background: var(--linen-warm);
+}
+.highlights__head {
+  text-align: center;
+  margin-bottom: var(--sp-12);
+}
+.highlights__head h2 { margin: var(--sp-4) 0 var(--sp-3); }
+.highlights__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--sp-6) var(--sp-8);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.hl-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: transform 0.4s var(--ease);
+}
+.hl-card:hover { transform: translateY(-3px); }
+.hl-card__num {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.04em;
+  z-index: 2;
+  background: var(--linen-warm);
+  padding: 4px 10px;
+}
+.hl-card__image {
+  aspect-ratio: 3/4;
+  max-height: 480px;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid rgba(184, 134, 44, 0.25);
+  margin-bottom: var(--sp-3);
+  transition: box-shadow 0.4s var(--ease);
+}
+.hl-card:hover .hl-card__image {
+  box-shadow: 0 12px 32px rgba(26, 20, 16, 0.15);
+}
+.hl-card__body { padding: 0 4px; }
+.hl-card__body h4 {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+.hl-card__meta {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.highlights__cta {
+  text-align: center;
+  margin-top: var(--sp-12);
+}
+
+/* === Knowledge teaser === */
+.kteaser {
+  padding: clamp(4rem, 10vw, 8rem) 0;
+  background: var(--linen);
+  position: relative;
+  overflow: hidden;
+}
+.kteaser__bg-knot {
+  position: absolute;
+  top: 50%;
+  right: -100px;
+  transform: translateY(-50%);
+  opacity: 0.06;
+  pointer-events: none;
+}
+.kteaser__head {
+  text-align: center;
+  margin-bottom: var(--sp-12);
+}
+.kteaser__head h2 { margin: var(--sp-4) 0 var(--sp-3); }
+.kteaser__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--sp-6);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.ktcard {
+  display: block;
+  padding: var(--sp-6);
+  background: var(--paper);
+  border: 1px solid rgba(184, 134, 44, 0.2);
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition: all 0.4s var(--ease);
+}
+.ktcard:hover {
+  background: var(--linen-warm);
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(26, 20, 16, 0.1);
+}
+.ktcard__num {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.04em;
+  margin-bottom: var(--sp-2);
+}
+.ktcard__divider { margin: var(--sp-3) 0; opacity: 0.6; }
+.ktcard h4 {
+  font-family: var(--serif-display);
+  font-weight: 400;
+  font-size: 1.3rem;
+  margin-bottom: var(--sp-3);
+}
+.ktcard p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: var(--sp-3);
+}
+.ktcard__more {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--cinnabar);
+}
+
+/* === Visit teaser === */
+.visit-teaser {
+  padding: clamp(3rem, 8vw, 6rem) 0;
+  background: var(--ink);
+  color: var(--linen);
+}
+.visit-teaser__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-8);
+  flex-wrap: wrap;
+}
+.visit-teaser__text .eyebrow { color: var(--gold-light); }
+.visit-teaser__text h2 {
+  color: var(--linen);
+  margin-top: var(--sp-2);
+}
+.visit-teaser__venue {
+  font-family: var(--serif-display);
+  font-style: italic;
+  color: var(--gold-light);
+  margin-top: var(--sp-3);
+  font-size: 1.05rem;
+}
+.visit-teaser .btn {
+  background: var(--linen);
+  color: var(--ink);
+  border-color: var(--linen);
+}
+.visit-teaser .btn:hover {
+  background: var(--cinnabar);
+  color: var(--linen);
+  border-color: var(--cinnabar);
+}

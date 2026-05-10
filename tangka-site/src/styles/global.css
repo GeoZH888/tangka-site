@@ -1,0 +1,305 @@
+/* =============================================================================
+   度量之间 · Sacred Measures · Tra le Misure Sacre
+   ZANG v2 — deeper Regong palette, prepared-canvas texture
+   ============================================================================= */
+
+:root {
+  /* === REGONG PALETTE (deeper, more authentic) === */
+  /* Lapis — slightly more violet, like Regong sky */
+  --lapis: #1e3a5f;
+  --lapis-dark: #14233d;
+  --lapis-light: #2a4a72;
+
+  /* Cinnabar — Regong red is deeper, more oxidized */
+  --cinnabar: #7d1f2e;            /* shifted from #9c1e2e */
+  --cinnabar-dark: #5a1420;       /* shifted from #6e1421 */
+  --cinnabar-light: #9c2e3f;
+
+  /* Gold — warmer, hammered leaf feel */
+  --gold: #c89028;                /* shifted from #b8862c */
+  --gold-dark: #7d4818;           /* shifted from #8a6418 */
+  --gold-light: #d4a84a;
+
+  /* Malachite — true Regong green */
+  --malachite: #2d4a3a;           /* shifted from #3d5a3d */
+  --malachite-dark: #1f3328;
+  --malachite-light: #4a6a52;
+
+  /* Linen / paper — slightly warmer ground */
+  --linen: #ede0c2;               /* shifted from #f0e6d2 — warmer */
+  --linen-warm: #f0e3c5;
+  --linen-deep: #e0d0a8;
+  --paper: #f5e8c8;
+  --raw-silk: #d8c89c;
+
+  --ink: #1a1410;
+  --ink-soft: #2d2520;
+  --ink-mid: #4a3c2e;
+
+  /* Type */
+  --serif-display: 'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', serif;
+  --serif-body: 'Lora', 'Noto Serif', 'Noto Serif SC', 'Songti SC', serif;
+  --serif-cn: 'Noto Serif SC', 'Songti SC', 'STSong', serif;
+  --serif-tibetan: 'Noto Serif Tibetan', 'Microsoft Himalaya', serif;
+
+  /* Spacing */
+  --sp-1: 0.25rem; --sp-2: 0.5rem; --sp-3: 0.75rem; --sp-4: 1rem;
+  --sp-6: 1.5rem; --sp-8: 2rem; --sp-10: 2.5rem; --sp-12: 3rem;
+  --sp-16: 4rem; --sp-20: 5rem; --sp-24: 6rem; --sp-32: 8rem; --sp-40: 10rem;
+
+  --content-max: 1320px;
+  --reading-max: 720px;
+  --nav-height: 80px;
+
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--serif-body);
+  background: var(--linen);
+  color: var(--ink);
+  line-height: 1.7;
+  font-size: 17px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  /* === HAND-PREPARED CANVAS GROUND ===
+     Three layers stacked:
+       1. Warm/cool color washes
+       2. Linen weave (diagonal threads)
+       3. Tiny noise dots (like sized canvas imperfections)
+     All with low opacity so it reads as material, not pattern. */
+  background-image:
+    /* Top warm wash — like ground gesso */
+    radial-gradient(ellipse 1200px 600px at 25% 0%, rgba(212, 168, 74, 0.10) 0%, transparent 60%),
+    /* Bottom cool tint */
+    radial-gradient(ellipse 1000px 500px at 75% 100%, rgba(30, 58, 95, 0.06) 0%, transparent 60%),
+    /* Subtle red wash mid-page */
+    radial-gradient(circle at 50% 50%, rgba(125, 31, 46, 0.03) 0%, transparent 50%),
+
+    /* Linen weave warp */
+    repeating-linear-gradient(
+      45deg,
+      rgba(184, 134, 44, 0.025) 0,
+      rgba(184, 134, 44, 0.025) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+    /* Linen weave weft */
+    repeating-linear-gradient(
+      -45deg,
+      rgba(26, 20, 16, 0.018) 0,
+      rgba(26, 20, 16, 0.018) 1px,
+      transparent 1px,
+      transparent 4px
+    ),
+
+    /* Tiny canvas-imperfection dots — sized but uneven */
+    radial-gradient(circle at 13% 27%, rgba(26, 20, 16, 0.04) 1px, transparent 2px),
+    radial-gradient(circle at 47% 11%, rgba(26, 20, 16, 0.03) 1px, transparent 2px),
+    radial-gradient(circle at 73% 53%, rgba(26, 20, 16, 0.04) 1px, transparent 2px),
+    radial-gradient(circle at 23% 71%, rgba(184, 134, 44, 0.05) 1px, transparent 2px),
+    radial-gradient(circle at 91% 33%, rgba(26, 20, 16, 0.03) 1px, transparent 2px),
+    radial-gradient(circle at 37% 89%, rgba(184, 134, 44, 0.04) 1px, transparent 2px),
+
+    /* Base — warm parchment gradient */
+    linear-gradient(180deg, var(--linen-warm) 0%, var(--linen) 50%, var(--linen-deep) 100%);
+  background-size:
+    auto, auto, auto,           /* washes */
+    auto, auto,                  /* weave */
+    200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px, 200px 200px,  /* dots tile */
+    auto;
+  background-attachment: fixed;
+}
+
+img, picture, svg, video { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: var(--cinnabar); text-decoration: none; transition: color 0.3s var(--ease); }
+a:hover { color: var(--cinnabar-light); }
+
+/* === Typography === */
+h1, h2, h3, h4 {
+  font-family: var(--serif-display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+h1 { font-size: clamp(3rem, 9vw, 7rem); font-weight: 300; }
+h2 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 300; }
+h3 { font-size: clamp(1.6rem, 2.8vw, 2.2rem); }
+h4 { font-size: 1.35rem; }
+
+h1.cn-title, h2.cn-title, h3.cn-title, h4.cn-title, .cn-title {
+  font-family: var(--serif-cn);
+  letter-spacing: 0.08em;
+}
+p { margin: 0; }
+em { font-style: italic; color: var(--gold-dark); }
+
+/* === Layout === */
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--sp-8);
+}
+.container--narrow { max-width: 960px; }
+.reading { max-width: var(--reading-max); margin: 0 auto; }
+@media (min-width: 768px) { .container { padding: 0 var(--sp-12); } }
+@media (max-width: 640px) { .container { padding: 0 var(--sp-5); } }
+
+/* === Reusable === */
+.eyebrow {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.92rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.rule {
+  width: 80px; height: 1px;
+  background: var(--gold);
+  margin: var(--sp-6) auto;
+  position: relative;
+}
+.rule::before, .rule::after {
+  content: ''; position: absolute; top: 50%;
+  width: 6px; height: 6px;
+  border-radius: 50%; background: var(--gold);
+  transform: translateY(-50%);
+}
+.rule::before { left: -12px; }
+.rule::after  { right: -12px; }
+
+/* === Buttons — luxury Regong === */
+.btn {
+  display: inline-flex; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-8);
+  background: var(--ink);
+  color: var(--linen);
+  font-family: var(--serif-display);
+  font-weight: 400; font-size: 0.95rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  border: 1px solid var(--ink);
+  position: relative; overflow: hidden;
+  transition: all 0.5s var(--ease-luxury);
+}
+.btn::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(212, 168, 74, 0.35) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.7s var(--ease-luxury);
+}
+.btn:hover::before { transform: translateX(100%); }
+.btn:hover {
+  background: var(--cinnabar);
+  border-color: var(--cinnabar);
+  color: var(--linen);
+  letter-spacing: 0.22em;
+  padding-left: var(--sp-12);
+  padding-right: var(--sp-12);
+}
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { background: var(--ink); color: var(--linen); }
+.btn-gold { background: var(--gold-dark); border-color: var(--gold-dark); color: var(--linen); }
+.btn-gold:hover { background: var(--gold); border-color: var(--gold); }
+
+/* === Lang switcher === */
+.lang-pill {
+  display: inline-flex;
+  background: rgba(26, 20, 16, 0.05);
+  border: 1px solid rgba(26, 20, 16, 0.1);
+  border-radius: 999px;
+  padding: 3px; gap: 2px;
+}
+.lang-pill button {
+  padding: 5px 14px; border-radius: 999px;
+  font-size: 0.78rem; font-weight: 500;
+  font-family: var(--serif-body);
+  color: var(--ink-soft);
+  letter-spacing: 0.1em;
+  transition: all 0.3s var(--ease);
+}
+.lang-pill button.active {
+  background: var(--ink); color: var(--linen); letter-spacing: 0.15em;
+}
+
+/* === Brocade frame wrapper === */
+.brocade-frame { position: relative; isolation: isolate; }
+.brocade-frame .brocade-border {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+}
+
+/* === Reveal animation === */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.4s var(--ease-luxury), transform 1.4s var(--ease-luxury);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.loading-state {
+  min-height: 60vh;
+  display: grid; place-items: center;
+  color: var(--gold-dark);
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+}
+
+::selection { background: var(--gold); color: var(--linen); }
+
+* { scrollbar-width: thin; scrollbar-color: var(--gold) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+main { animation: pageEnter 1s var(--ease-luxury); }
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === Drop cap === */
+.dropcap {
+  font-family: var(--serif-display);
+  float: left;
+  font-size: 5em;
+  line-height: 0.85;
+  font-weight: 400;
+  margin: 0.05em 0.12em 0 0;
+  padding: 0;
+  color: var(--cinnabar);
+  font-style: italic;
+}
+
+/* === Mountain horizon backdrop wrapper === */
+.mountain-horizon-bg {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200%;
+  max-width: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* === Decorative Tibetan letter as background ornament === */
+.decorative-tibetan {
+  font-family: var(--serif-tibetan);
+  user-select: none;
+}

@@ -1,0 +1,322 @@
+/* =============================================================================
+   David / 大卫 / Davide — chat panel + character
+   ============================================================================= */
+
+/* --- Floating button ------------------------------------------------------ */
+.david-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 90;
+  width: 96px;
+  height: 134px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  filter: drop-shadow(0 8px 16px rgba(26, 20, 16, 0.25));
+  transition: transform 0.4s var(--ease), filter 0.4s var(--ease);
+}
+.david-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  filter: drop-shadow(0 12px 20px rgba(26, 20, 16, 0.35));
+}
+.david-btn--open {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.85);
+}
+
+/* Subtle attention pulse */
+.david-btn__pulse {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 8px;
+  background: radial-gradient(ellipse, rgba(212, 168, 74, 0.45), transparent 70%);
+  border-radius: 50%;
+  animation: pulse 3.5s var(--ease) infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: translateX(-50%) scale(0.95); }
+  50%      { opacity: 0.9; transform: translateX(-50%) scale(1.08); }
+}
+
+@media (max-width: 640px) {
+  .david-btn {
+    width: 72px;
+    height: 100px;
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* --- Character SVG animations -------------------------------------------- */
+.david-svg {
+  overflow: visible;
+}
+
+/* Halo glow only shows when speaking */
+.david-svg .david-halo { opacity: 0; transition: opacity 0.6s var(--ease); }
+.david-svg.pose-speaking .david-halo { opacity: 1; animation: haloPulse 2.5s ease-in-out infinite; }
+@keyframes haloPulse {
+  0%, 100% { opacity: 0.6; }
+  50%      { opacity: 1; }
+}
+
+/* Idle eye blink — slow, every 4-5 seconds */
+.david-svg .david-eyelid {
+  animation: blink 5s ease-in-out infinite;
+}
+.david-svg .david-eyelid-r { animation-delay: 0.05s; }
+@keyframes blink {
+  0%, 92%, 100% { ry: 0; }
+  94%, 96%      { ry: 2.4; }
+}
+
+/* Greeted — head tilts gently down */
+.david-svg.pose-greeted .david-head { transform-origin: 100px 90px; transform: rotate(-3deg) translateY(2px); transition: transform 0.6s var(--ease); }
+
+/* Thinking — left hand reaches up */
+.david-svg.pose-thinking .david-arm-left {
+  transform: rotate(-12deg) translateY(-15px);
+  transform-origin: 70px 110px;
+  transition: transform 0.5s var(--ease);
+}
+.david-svg.pose-thinking .david-pupil { transform: translateY(-1px); transition: transform 0.4s var(--ease); }
+
+/* Speaking — mouth animates open/close, slight nod */
+.david-svg.pose-speaking .david-mouth {
+  animation: mouthSpeak 0.5s ease-in-out infinite;
+}
+.david-svg.pose-speaking .david-head { animation: headNod 1.2s ease-in-out infinite; transform-origin: 100px 90px; }
+@keyframes mouthSpeak {
+  0%, 100% { d: path('M 95 76 Q 100 78 105 76'); }
+  50%      { d: path('M 95 76 Q 100 81 105 76'); }
+}
+@keyframes headNod {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(1.5deg); }
+}
+
+/* --- Chat panel ----------------------------------------------------------- */
+.david-panel {
+  position: fixed;
+  z-index: 95;
+  background: var(--ivory-warm);
+  border: 1px solid rgba(184, 134, 44, 0.3);
+  box-shadow: 0 20px 60px rgba(26, 20, 16, 0.25);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(20px) scale(0.96);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+
+  /* Desktop position: bottom-right corner card */
+  bottom: 24px;
+  right: 24px;
+  width: 380px;
+  max-height: min(640px, calc(100vh - 48px));
+  border-radius: 6px;
+}
+.david-panel--open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Mobile: full-screen sheet */
+@media (max-width: 640px) {
+  .david-panel {
+    inset: 0;
+    width: 100%;
+    max-height: 100vh;
+    max-height: 100dvh;
+    border-radius: 0;
+    border: none;
+  }
+}
+
+/* --- Header --- */
+.david-panel__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: linear-gradient(180deg, var(--parchment), var(--ivory-warm));
+  border-bottom: 1px solid rgba(184, 134, 44, 0.2);
+  position: relative;
+}
+.david-panel__avatar {
+  width: 56px;
+  height: 78px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: -8px; /* let the figure poke down a bit */
+}
+.david-panel__id { flex: 1; min-width: 0; }
+.david-panel__name {
+  font-family: var(--serif-display);
+  font-size: 1.4rem;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+.david-panel__sub {
+  font-size: 0.78rem;
+  color: var(--gold-dark);
+  font-style: italic;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+.david-panel__close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--ink-soft);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s var(--ease);
+}
+.david-panel__close:hover {
+  background: rgba(26, 20, 16, 0.08);
+  color: var(--ink);
+}
+
+/* --- Messages list --- */
+.david-panel__messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+.david-panel__messages::-webkit-scrollbar { width: 5px; }
+.david-panel__messages::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+.david-msg { display: flex; }
+.david-msg--user { justify-content: flex-end; }
+.david-msg--assistant { justify-content: flex-start; }
+
+.david-msg__bubble {
+  max-width: 85%;
+  padding: var(--sp-3) var(--sp-4);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  border-radius: 14px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.david-msg--user .david-msg__bubble {
+  background: var(--ink);
+  color: var(--ivory);
+  border-bottom-right-radius: 4px;
+}
+.david-msg--assistant .david-msg__bubble {
+  background: var(--parchment);
+  color: var(--ink);
+  border: 1px solid rgba(184, 134, 44, 0.25);
+  border-bottom-left-radius: 4px;
+}
+.david-msg.is-error .david-msg__bubble {
+  background: rgba(156, 30, 46, 0.06);
+  border-color: rgba(156, 30, 46, 0.3);
+  color: var(--cinnabar-dark);
+  font-style: italic;
+}
+
+/* Typing indicator */
+.david-msg__typing {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: var(--sp-3) var(--sp-4);
+}
+.david-msg__typing span {
+  width: 6px; height: 6px;
+  background: var(--gold-dark);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: typing 1.4s ease-in-out infinite;
+}
+.david-msg__typing span:nth-child(2) { animation-delay: 0.2s; }
+.david-msg__typing span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30%           { transform: translateY(-4px); opacity: 1; }
+}
+
+/* --- Compose --- */
+.david-panel__compose {
+  display: flex;
+  align-items: end;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-4);
+  border-top: 1px solid rgba(184, 134, 44, 0.2);
+  background: var(--ivory-warm);
+}
+.david-panel__compose textarea {
+  flex: 1;
+  resize: none;
+  border: 1px solid rgba(26, 20, 16, 0.15);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-family: var(--serif-body);
+  font-size: 0.95rem;
+  background: var(--ivory);
+  color: var(--ink);
+  line-height: 1.4;
+  max-height: 100px;
+  outline: none;
+  transition: border-color 0.2s var(--ease);
+}
+.david-panel__compose textarea:focus {
+  border-color: var(--gold);
+}
+.david-panel__compose textarea::placeholder { color: rgba(26, 20, 16, 0.4); }
+
+.david-panel__send {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--ivory);
+  display: grid;
+  place-items: center;
+  transition: background 0.2s var(--ease), transform 0.2s var(--ease);
+  flex-shrink: 0;
+}
+.david-panel__send:hover:not(:disabled) {
+  background: var(--cinnabar-dark);
+  transform: scale(1.05);
+}
+.david-panel__send:disabled {
+  background: rgba(26, 20, 16, 0.2);
+  cursor: not-allowed;
+}
+
+/* --- Disclaimer --- */
+.david-panel__disclaimer {
+  padding: var(--sp-2) var(--sp-4) var(--sp-3);
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+  opacity: 0.55;
+  font-style: italic;
+  line-height: 1.4;
+  background: var(--ivory-warm);
+  border-top: 1px solid rgba(184, 134, 44, 0.1);
+}

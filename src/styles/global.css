@@ -1,0 +1,325 @@
+/* =============================================================================
+   度量之间 · Sacred Measures · Tra le Misure Sacre
+   POSTER theme — deep ultramarine blue site-wide
+   Inspired by the Accademia delle Arti del Disegno exhibition poster.
+
+   The studio admin panel keeps parchment via .admin scoping (see admin.css);
+   this file only sets the public-site defaults.
+   ============================================================================= */
+
+:root {
+  /* === POSTER PALETTE (the new default) === */
+  --poster-blue:        #1e3a6b;
+  --poster-blue-dark:   #142850;
+  --poster-blue-deeper: #0f1e3c;
+  --poster-blue-light:  #2a4a7c;
+  --poster-blue-lighter:#3a5d92;
+
+  /* Cream / off-white — primary text on blue */
+  --cream:              #f0e6d2;
+  --cream-dim:          #c8b896;
+  --cream-warm:         #f5e8c8;
+
+  /* Pure white — for emphasis headlines */
+  --white-pure:         #ffffff;
+
+  /* Accent colors retained from the thangka palette */
+  --cinnabar:           #c0392b;          /* slightly brighter for blue-ground */
+  --cinnabar-deep:      #7d1f2e;
+  --gold:               #d4a84a;
+  --gold-deep:          #c89028;
+
+  /* === LEGACY ALIASES — keep old class refs working === */
+  /* Anywhere ZANG v2 components reference --lapis, --linen, etc., they now
+     resolve to poster equivalents so the components don't need rewriting. */
+  --lapis:        var(--poster-blue);
+  --lapis-dark:   var(--poster-blue-dark);
+  --lapis-light:  var(--poster-blue-light);
+  --linen:        var(--cream);            /* "linen" now means cream over blue */
+  --linen-warm:   var(--cream-warm);
+  --linen-deep:   var(--cream-dim);
+  --paper:        var(--cream-warm);
+  --raw-silk:     var(--cream-dim);
+  --ink:          var(--white-pure);       /* "ink" (formerly black) is now white */
+  --ink-soft:     var(--cream);
+  --ink-mid:      var(--cream-dim);
+  --gold-light:   var(--gold);
+  --gold-dark:    var(--gold-deep);
+  --malachite:    #2d4a3a;
+  --cinnabar-dark: var(--cinnabar-deep);
+  --cinnabar-light: var(--cinnabar);
+  /* Old names kept working — AudioGuide & David panels stay on cream ground */
+  --parchment:    var(--cream);
+  --ivory:        var(--white-pure);
+  --ivory-warm:   var(--cream-warm);
+  --ivory-dark:   var(--cream-dim);
+
+  /* === Type === */
+  /* Sans for poster headlines — Helvetica on Mac/Win is universal,
+     Inter is the closest substitute when fonts.googleapis loads. */
+  --sans-display: 'Inter', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  --serif-display: 'Cormorant Garamond', 'Noto Serif SC', 'Songti SC', serif;
+  --serif-body: 'Lora', 'Noto Serif', 'Noto Serif SC', 'Songti SC', serif;
+  --serif-cn: 'Noto Serif SC', 'Songti SC', 'STSong', serif;
+  --serif-tibetan: 'Noto Serif Tibetan', 'Microsoft Himalaya', serif;
+
+  /* === Spacing === */
+  --sp-1: 0.25rem; --sp-2: 0.5rem; --sp-3: 0.75rem; --sp-4: 1rem;
+  --sp-6: 1.5rem; --sp-8: 2rem; --sp-10: 2.5rem; --sp-12: 3rem;
+  --sp-16: 4rem; --sp-20: 5rem; --sp-24: 6rem; --sp-32: 8rem; --sp-40: 10rem;
+
+  --content-max: 1320px;
+  --reading-max: 720px;
+  --nav-height: 76px;
+
+  --ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* === Reset === */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html, body { height: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--sans-display);
+  background: var(--poster-blue);
+  color: var(--cream);
+  line-height: 1.65;
+  font-size: 16px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+
+  /* Subtle texture so the blue isn't flat */
+  background-image:
+    /* Vignette top-right (mimics the poster's slight light gradient) */
+    radial-gradient(ellipse 1400px 800px at 80% 0%, rgba(255, 255, 255, 0.04) 0%, transparent 60%),
+    /* Bottom-left subtle warmth */
+    radial-gradient(ellipse 1000px 600px at 20% 100%, rgba(212, 168, 74, 0.04) 0%, transparent 60%);
+  background-attachment: fixed;
+}
+
+img, picture, svg, video { display: block; max-width: 100%; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: var(--cream); text-decoration: none; transition: color 0.3s var(--ease); }
+a:hover { color: var(--white-pure); }
+
+/* === Typography (default — sans-serif headlines like the poster) === */
+h1, h2, h3, h4 {
+  font-family: var(--sans-display);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  color: var(--white-pure);
+}
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+h2 { font-size: clamp(2rem, 4vw, 3.2rem); }
+h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); }
+h4 { font-size: 1.2rem; }
+
+/* "Caps" version of headlines used in posters */
+.poster-cap {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+h1.cn-title, h2.cn-title, h3.cn-title, h4.cn-title, .cn-title {
+  font-family: var(--serif-cn);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+p { margin: 0; }
+em { font-style: italic; color: var(--gold); }
+
+/* === Layout === */
+.container {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--sp-8);
+}
+.container--narrow { max-width: 960px; }
+.reading { max-width: var(--reading-max); margin: 0 auto; }
+@media (min-width: 768px) { .container { padding: 0 var(--sp-12); } }
+@media (max-width: 640px) { .container { padding: 0 var(--sp-5); } }
+
+/* === Reusable === */
+.eyebrow {
+  font-family: var(--sans-display);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.85;
+}
+
+.hairline {
+  width: 100%;
+  height: 1px;
+  background: rgba(240, 230, 210, 0.25);
+  margin: var(--sp-6) 0;
+}
+
+.rule-thin {
+  width: 60px;
+  height: 1px;
+  background: var(--cream);
+  margin: var(--sp-6) 0;
+}
+
+/* === Buttons — poster style === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.85rem 1.6rem;
+  background: var(--cream);
+  color: var(--poster-blue);
+  font-family: var(--sans-display);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--cream);
+  transition: all 0.3s var(--ease);
+}
+.btn:hover {
+  background: transparent;
+  color: var(--cream);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--cream);
+}
+.btn-ghost:hover {
+  background: var(--cream);
+  color: var(--poster-blue);
+}
+.btn-gold {
+  background: var(--gold);
+  color: var(--poster-blue);
+  border-color: var(--gold);
+}
+.btn-gold:hover {
+  background: transparent;
+  color: var(--gold);
+}
+
+/* === Lang switcher (over blue) === */
+.lang-pill {
+  display: inline-flex;
+  background: rgba(240, 230, 210, 0.12);
+  border: 1px solid rgba(240, 230, 210, 0.25);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+}
+.lang-pill button {
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-family: var(--sans-display);
+  color: var(--cream);
+  letter-spacing: 0.1em;
+  transition: all 0.3s var(--ease);
+}
+.lang-pill button.active {
+  background: var(--cream);
+  color: var(--poster-blue);
+}
+
+/* === Reading panels — for long-form content over blue === */
+/* Articles, descriptions, etc. live inside these so the body text is
+   on a soft cream ground and stays comfortable to read. */
+.reading-panel {
+  background: var(--cream);
+  color: #1a1410;          /* Real ink — only inside reading panels */
+  padding: clamp(2rem, 5vw, 4rem);
+  font-family: 'Lora', 'Noto Serif SC', 'Songti SC', serif;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  border-radius: 2px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+}
+.reading-panel h1, .reading-panel h2, .reading-panel h3, .reading-panel h4 {
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+  font-weight: 400;
+  color: #1a1410;
+}
+.reading-panel a {
+  color: var(--cinnabar-deep);
+  border-bottom: 1px solid currentColor;
+}
+.reading-panel a:hover { color: #1a1410; }
+.reading-panel em { color: var(--gold-deep); }
+
+/* === Cards (over blue) — minimal chrome === */
+.card-poster {
+  background: var(--poster-blue-light);
+  border: 1px solid rgba(240, 230, 210, 0.18);
+  transition: border-color 0.3s var(--ease), transform 0.4s var(--ease-luxury);
+}
+.card-poster:hover {
+  border-color: rgba(240, 230, 210, 0.5);
+}
+
+/* === Loading state === */
+.loading-state {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+  color: var(--cream-dim);
+  font-family: var(--sans-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+::selection { background: var(--cream); color: var(--poster-blue); }
+
+* { scrollbar-width: thin; scrollbar-color: var(--cream-dim) transparent; }
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-thumb { background: var(--cream-dim); border-radius: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+main { animation: pageEnter 0.7s var(--ease-luxury); }
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* === Drop cap (only inside reading panels) === */
+.reading-panel .dropcap {
+  font-family: 'Cormorant Garamond', serif;
+  float: left;
+  font-size: 5em;
+  line-height: 0.85;
+  font-weight: 400;
+  margin: 0.05em 0.12em 0 0;
+  color: var(--cinnabar-deep);
+  font-style: italic;
+}
+
+/* === Decorative Tibetan letters === */
+.decorative-tibetan {
+  font-family: var(--serif-tibetan);
+  user-select: none;
+}
+
+/* === Studio (admin) — see admin.css for full variable reset === */
+
+/* === Scoped overrides so old code on cream panels reads correctly ===
+   These containers have cream/parchment backgrounds, so "ink" needs to be
+   actual ink (dark), not white. */
+.ag-page,
+.david-panel,
+.david-bubble {
+  --ink: #1a1410;
+  --ink-soft: #2d2520;
+  --ink-mid: #4a3c2e;
+}

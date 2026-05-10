@@ -1,0 +1,187 @@
+/* =============================================================================
+   AudioGuidePage — /a/:slug — the QR-scan target. Mobile-first.
+   ============================================================================= */
+
+.ag-page {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: var(--parchment);
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+}
+
+.ag-loading,
+.ag-error {
+  align-items: center;
+  justify-content: center;
+}
+.ag-loader,
+.ag-error-mark {
+  font-family: var(--serif-display);
+  font-size: 4rem;
+  color: var(--gold);
+  opacity: 0.6;
+}
+.ag-error-inner {
+  text-align: center;
+  padding: var(--sp-8);
+}
+.ag-error-inner p {
+  margin: var(--sp-6) 0;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* --- Top bar --- */
+.ag-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid rgba(184, 134, 44, 0.2);
+  background: var(--ivory-warm);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+}
+.ag-brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  font-family: var(--serif-display);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+.ag-brand .cn-title { font-size: 1rem; letter-spacing: 0.15em; }
+.ag-brand:hover { color: var(--ink); }
+.ag-divider { color: var(--gold); }
+
+/* --- Main column --- */
+.ag-body {
+  flex: 1;
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+  padding: var(--sp-6);
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Image --- */
+.ag-image {
+  aspect-ratio: 3 / 4;
+  width: 100%;
+  background-color: var(--ag-bg, var(--lapis));
+  border: 1px solid rgba(184, 134, 44, 0.3);
+  margin-bottom: var(--sp-6);
+  box-shadow: 0 8px 24px rgba(26, 20, 16, 0.12);
+}
+
+/* --- Title block --- */
+.ag-meta {
+  text-align: center;
+  margin-bottom: var(--sp-6);
+}
+.ag-year {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+.ag-title {
+  font-family: var(--serif-display);
+  font-size: clamp(1.6rem, 5vw, 2.2rem);
+  line-height: 1.2;
+  margin: var(--sp-3) 0;
+  font-weight: 400;
+  color: var(--ink);
+}
+.ag-title.cn-title { font-family: var(--serif-cn); letter-spacing: 0.05em; }
+.ag-specs {
+  font-family: var(--serif-display);
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+.ag-specs .dot { margin: 0 var(--sp-2); color: var(--gold); }
+
+/* --- Audio CTA --- */
+.ag-audio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  margin: var(--sp-6) 0;
+  padding: var(--sp-6) var(--sp-4);
+  border-top: 1px solid rgba(184, 134, 44, 0.2);
+  border-bottom: 1px solid rgba(184, 134, 44, 0.2);
+}
+.ag-play-btn {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--ivory);
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  box-shadow: 0 8px 24px rgba(26, 20, 16, 0.25);
+}
+.ag-play-btn:hover { transform: scale(1.05); background: var(--cinnabar-dark); }
+.ag-play-btn:active { transform: scale(0.98); }
+
+.ag-play-btn--playing {
+  background: var(--cinnabar-dark);
+  animation: agPulse 2s ease-in-out infinite;
+}
+@keyframes agPulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(156, 30, 46, 0.3); }
+  50%      { box-shadow: 0 8px 28px rgba(156, 30, 46, 0.55); }
+}
+
+.ag-audio-label {
+  font-family: var(--serif-display);
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+.ag-audio-note {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 0.8rem;
+  color: var(--gold-dark);
+  opacity: 0.8;
+}
+
+/* --- Description --- */
+.ag-description {
+  margin: var(--sp-4) 0;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+}
+.ag-description p { margin-bottom: var(--sp-3); }
+
+/* --- Footer --- */
+.ag-footer {
+  margin-top: auto;
+  padding: var(--sp-8) 0 var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  align-items: center;
+  text-align: center;
+  border-top: 1px solid rgba(184, 134, 44, 0.15);
+}
+.ag-link {
+  font-family: var(--serif-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--cinnabar-dark);
+  letter-spacing: 0.04em;
+}
+.ag-link:hover { color: var(--cinnabar); }

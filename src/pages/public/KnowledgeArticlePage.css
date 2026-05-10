@@ -1,0 +1,138 @@
+.ka-poster {
+  padding-top: var(--nav-height);
+  padding-bottom: var(--sp-20);
+}
+
+/* === Blue header band === */
+.ka-poster__head {
+  padding: var(--sp-16) 0 var(--sp-12);
+  text-align: center;
+}
+.ka-poster__back {
+  display: inline-block;
+  font-family: var(--sans-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+  margin-bottom: var(--sp-6);
+}
+.ka-poster__back:hover { color: var(--cream); }
+.ka-poster__head .eyebrow {
+  margin-bottom: var(--sp-3);
+  color: var(--gold);
+}
+.ka-poster__title {
+  font-family: var(--sans-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0;
+  color: var(--white-pure);
+  line-height: 1.15;
+  margin-bottom: var(--sp-4);
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ka-poster__title.cn-title {
+  font-family: var(--serif-cn);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.ka-poster__meta {
+  font-family: var(--sans-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream-dim);
+}
+
+/* === Cream reading panel === */
+.ka-poster__body {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+.ka-poster__body--cn {
+  font-family: 'Noto Serif SC', 'Songti SC', serif;
+  letter-spacing: 0.02em;
+  font-size: 1.05rem;
+  line-height: 1.95;
+}
+.ka-poster__body h1,
+.ka-poster__body h2 {
+  font-style: italic;
+  font-weight: 400;
+  margin: var(--sp-8) 0 var(--sp-4);
+  color: var(--cinnabar-deep);
+}
+.ka-poster__body h1 { font-size: 2rem; }
+.ka-poster__body h2 { font-size: 1.5rem; }
+.ka-poster__body h3 {
+  font-style: italic;
+  font-weight: 500;
+  margin: var(--sp-6) 0 var(--sp-3);
+  font-size: 1.25rem;
+  color: #1a1410;
+}
+.ka-poster__body p { margin-bottom: var(--sp-4); }
+.ka-poster__body ul, .ka-poster__body ol {
+  margin: var(--sp-4) 0;
+  padding-left: var(--sp-6);
+}
+.ka-poster__body li { margin-bottom: var(--sp-2); }
+.ka-poster__body blockquote {
+  border-left: 3px solid var(--gold-deep);
+  padding-left: var(--sp-4);
+  margin: var(--sp-6) 0;
+  font-style: italic;
+  color: #4a3c2e;
+}
+.ka-poster__body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--sp-6) 0;
+  font-size: 0.95rem;
+}
+.ka-poster__body th, .ka-poster__body td {
+  text-align: left;
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid rgba(184, 134, 44, 0.25);
+}
+.ka-poster__body th {
+  font-weight: 600;
+  background: rgba(184, 134, 44, 0.08);
+}
+
+/* === Related artworks === */
+.ka-poster__related {
+  margin-top: var(--sp-12);
+}
+.ka-poster__related-rule {
+  width: 60px;
+  height: 1px;
+  background: var(--gold-deep);
+  margin-bottom: var(--sp-6);
+}
+.ka-poster__related-eyebrow {
+  font-family: var(--sans-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: var(--sp-3);
+}
+.ka-poster__related-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.ka-poster__related-link {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--cinnabar-deep);
+  border-bottom: none !important;
+}
+.ka-poster__related-link:hover { color: #1a1410; }
