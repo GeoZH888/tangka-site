@@ -1,6 +1,7 @@
 # Netlify configuration for the tangka site (deploys to tangka.netlify.app)
 # The custom-domain proxy lives in the david-zhongwen.net repo's netlify.toml.
 
+# Netlify configuration for the tangka site
 [build]
   command = "npm run build"
   publish = "dist"
