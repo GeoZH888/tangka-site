@@ -7,9 +7,8 @@
   functions = "netlify/functions"
 
 [build.environment]
-  [build.environment]
-     NODE_VERSION = "20"
-     SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY,VITE_EXHIBITION_SLUG,VITE_BASE_PATH,VITE_SITE_BASE_URL,VITE_STUDIO_PASSWORD"
+  NODE_VERSION = "20"
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY,VITE_EXHIBITION_SLUG,VITE_BASE_PATH,VITE_SITE_BASE_URL,VITE_STUDIO_PASSWORD"
 
 # SPA fallback — every unknown route serves index.html so React Router can handle it
 [[redirects]]
