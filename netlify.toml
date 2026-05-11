@@ -1,7 +1,6 @@
-# Netlify configuration for the tangka site (deploys to tangka.netlify.app)
-# The custom-domain proxy lives in the david-zhongwen.net repo's netlify.toml.
+# Netlify configuration for the tangka site (deploys to feiyitangka.netlify.app)
+# Proxied at david-zhongwen.net/feiyi/tangka-exhibition/* via clf-platform's netlify.toml.
 
-# Netlify configuration for the tangka site
 [build]
   command = "npm run build"
   publish = "dist"
@@ -11,10 +10,28 @@
   NODE_VERSION = "20"
   SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY,VITE_EXHIBITION_SLUG,VITE_BASE_PATH,VITE_SITE_BASE_URL,VITE_STUDIO_PASSWORD"
 
-# SPA fallback — every unknown route serves index.html so React Router can handle it
+# Asset rewrites — Vite emits HTML with /feiyi/tangka-exhibition/assets/... URLs
+# but actual files live at /assets/... — rewrite to map them
+[[redirects]]
+  from = "/feiyi/tangka-exhibition/assets/*"
+  to = "/assets/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/feiyi/tangka-exhibition/favicon.ico"
+  to = "/favicon.ico"
+  status = 200
+
+# API → functions
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
+  status = 200
+
+# SPA fallback — HTML routes serve index.html for React Router
+[[redirects]]
+  from = "/feiyi/tangka-exhibition/*"
+  to = "/index.html"
   status = 200
 
 [[redirects]]
@@ -22,19 +39,9 @@
   to = "/index.html"
   status = 200
 
-  # In netlify.toml of the david-zhongwen.net repo
-[[redirects]]
-  from = "/feiyi/tangka/*"
-  to = "https://feiyitangka.netlify.app/feiyi/tangka/:splat"
-  status = 200
-  force = true
-
-  
-
 [functions]
   node_bundler = "esbuild"
 
-# Cache static assets aggressively (Vite hashes filenames)
 [[headers]]
   for = "/assets/*"
   [headers.values]
